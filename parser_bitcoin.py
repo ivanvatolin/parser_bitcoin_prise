@@ -8,7 +8,7 @@ from datetime import datetime
 import requests
 import csv
 from bs4 import BeautifulSoup
-
+from multiprocessing import Pool
 
 URL = 'https://coinmarketcap.com/all/views/all/'
 
@@ -63,7 +63,10 @@ def main():
         html = get_html(link)
         data = get_page_data(html)
         write_csv(data)
-        print('{} {} parsed at {} of total {}'.format(i, data['name'], datetime.now()-start, start_total - datetime.now()))
+        print('{} {} parsed at {} of total {}'.format(i,
+                                                      data['name'],
+                                                      datetime.now() - start,
+                                                      datetime.now() - start_total))
     print('All links parsed for', str(start_total - datetime.now()))
 
 
